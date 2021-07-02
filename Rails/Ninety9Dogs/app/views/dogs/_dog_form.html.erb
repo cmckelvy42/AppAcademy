@@ -1,0 +1,52 @@
+<%action = (dog.persisted? ? dog_url(dog) : dogs_url) %>
+<%method = (dog.persisted? ? :patch : :post)%>
+<%selected = (dog.persisted? ? "" : "selected")%>
+<%submit_text = (dog.persisted? ? 'Update' : 'Create') + ' dog!' %>
+
+<form action="<%=action%>" method="post">
+    <input type="hidden" name="_method" value="<%=method%>">
+    <label for="dog_name">Name</label>
+    <input
+        type="text"
+        name="dog[name]"
+        id="dog_name"
+        value="<%=dog.name%>">
+    <label for="dog_birth_date">Birth Date</label>
+    <input
+        type="date"
+        name="dog[birth_date]"
+        id="dog_birth_date"
+        value="<%=dog.birth_date%>">
+    <br>
+    <label for="dog_color">Color</label>
+    <select name="dog[color]" id = "dog_color">
+        <option disabled <%=selected%>> -- Select a Color -- </option>
+        <% Dog::DOG_COLORS.each do |color|%>
+            <option
+            <%=dog.color == color ? "selected" : ""%>
+            value="<%=color%>"><%=color.capitalize%>
+            </option>
+        <%end%>
+
+    </select>
+<br>
+    <label for="dog_sex_male">Male</label>
+    <input
+        type="radio"
+        name="dog[sex]"
+        value="M"
+        id="dog_sex_male"
+        <%= dog.sex == "M" ? "checked" : "" %>>
+    <label for="dog_sex_female">Female</label>
+    <input
+        type="radio"
+        name="dog[sex]"
+        value="F"
+        id="dog_sex_female"
+        <%= dog.sex == "F" ? "checked" : "" %>>
+<br>
+    <label for="dog_description">Description</label>
+    <textarea name="dog[description]" id="dog_description"><%= dog.description %></textarea>
+    <input type="submit" value="<%= submit_text %>">
+</form>
+

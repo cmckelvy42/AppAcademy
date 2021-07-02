@@ -1,0 +1,36 @@
+<h1>Request a Rental</h1>
+<% flash.each do |key, value| %>
+    <div class="flash <%= key %>">
+        <%value.each do |v|%>
+            <div style = "color:red" class="flash <%=key%>"><%=v%></div>
+        <%end%>
+    </div>
+    <br>
+<% end %>
+<form action="<%=dog_rental_requests_url%>" method="post">
+    <label for="dog_id">Dog</label>
+    <select name="dog_rental_request[dog_id]" id = "dog_id">
+        <option disabled selected> -- Select a Dog -- </option>
+        <% Dog.all.each do |dog|%>
+            <option
+                value="<%=dog.id%>"><%=dog.name.capitalize%>
+            </option>
+        <%end%>
+    </select>
+    <br>
+    <label for="request_start_date">Start Date</label>
+    <input
+        type="date"
+        name="dog_rental_request[start_date]"
+        id="request_start_date"
+        value="<%=Date.current%>">
+    <br>
+    <label for="request_end_date">End Date</label>
+    <input
+        type="date"
+        name="dog_rental_request[end_date]"
+        id="request_end_date"
+        value="<%=Date.tomorrow%>">
+    <input type="submit" value="Request Rental">
+</form>
+

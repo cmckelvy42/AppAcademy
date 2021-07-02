@@ -1,0 +1,44 @@
+<h1><%=@dog.name%></h1>
+<a href="<%= edit_dog_url(@dog) %>">Edit <%= @dog.name %></a>
+<table>
+    <tr>
+        <th>Attribute</th>
+        <th>Value</th>
+    </tr>
+    <%[:age, :birth_date, :color, :sex, :description].each do |attr_name|%>
+        <tr>
+            <td><%=attr_name%></td>
+            <td><%= @dog.send(attr_name)%></td>
+        </tr>
+    <%end%>    
+</table>
+
+<br>
+<h2>Rental Requests</h2>
+<table>
+  <tr>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Status</th>
+  </tr>
+  <% @dog.rental_requests.order('start_date').each do |req| %>
+    <tr>
+        <td><%= req.start_date %></td>
+        <td><%= req.end_date %></td>
+        <td><% if req.pending? %>
+        <form action="<%= approve_dog_rental_request_url(req) %>" method="post">
+          <input type="submit" value="Approve">
+        </form>
+        <form action="<%= deny_dog_rental_request_url(req) %>" method="post">
+          <input type="submit" value="Deny">
+        </form>
+    <% else %>
+      <%= req.status %>    <% end %>
+        </tr>
+  <% end %>
+</table>
+<br>
+
+<a href = "<%=dogs_url%>">Back to index</a>
+
+
