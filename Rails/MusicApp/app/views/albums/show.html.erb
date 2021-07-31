@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @album.title %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @album.year %>
+</p>
+
+<p>
+  <strong>Band:</strong>
+  <%= link_to @album.band.name, band_url(@album.band) %>
+</p>
+
+<p>
+  <strong>Production:</strong>
+  <%= @album.live ? "Live" : "Studio"%>
+</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Track Title</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @album.tracks.order('tracks.ord ASC').each do |track| %>
+      <tr>
+        <td><%= track.ord %></td>
+        <td><%= link_to track.title, track_url(track) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Add Track', new_album_track_url(@album)%> |
+<%= link_to 'Edit', edit_album_path(@album) %> |
+<%= link_to 'Destroy', @album, method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back to Albums', albums_path %>

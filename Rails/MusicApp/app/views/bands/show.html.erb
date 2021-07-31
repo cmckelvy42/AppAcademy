@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @band.name %>
+</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Album</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @band.albums.order('albums.year ASC').each do |album| %>
+      <tr>
+        <td><%= link_to album.title, album_url(album) %></td>
+        <td><%= album.year %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<%= link_to 'Add Album', new_band_album_url(@band)%>
+<%= link_to 'Edit', edit_band_path(@band) %> |
+<%= link_to 'Back to Bands', bands_path %>

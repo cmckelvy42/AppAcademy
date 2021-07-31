@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MusicApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%if current_user%>
+      <%=current_user.name%>
+      <a href="<%=logout_url%>">Logout</a>
+    <%else%>
+      <%=link_to 'Login', login_path %>
+      <%= link_to 'New User', new_user_path %>
+    <%end%>
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>

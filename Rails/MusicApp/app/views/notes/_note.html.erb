@@ -1,0 +1,7 @@
+<tr>
+  <td><%=note.user.name%></td>
+  <td><%=note.note%></td>
+  <%if note.user == current_user%>
+    <td><%= link_to 'Delete', note_url(note), method: :delete %></td>
+  <%end%>
+</tr>

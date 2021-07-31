@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+<p id="alert"><%= alert %></p>
+
+
+<p>
+  <strong>Title:</strong>
+  <%= @track.title %>
+</p>
+
+<p>
+  <strong>Album:</strong>
+  <%= @track.album_id %>
+</p>
+
+<p>
+  <strong>Track Number:</strong>
+  <%= @track.ord %>
+</p>
+
+<p>
+  <strong>Bonus Track?:</strong>
+  <%= @track.bonus ? "Yes" : "No" %>
+</p>
+
+<p>
+  <strong>Lyrics:</strong>
+  <%= @track.lyrics %>
+</p>
+<%= render 'notes/form', note:Note.new, track_id: @track.id%>
+
+<table>
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @track.notes.each do |note| %>
+      <%= render "notes/note", note: note %>
+    <%end%>
+  </tbody>
+</table>
+<%= link_to 'Edit', edit_track_path(@track) %> |
+<%= link_to 'Back', tracks_path %>
